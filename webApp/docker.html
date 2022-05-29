@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DockerFile</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <br><br>
+    <div class="container bg-white">
+        <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+          <label for="" class="col-form-label col-sm-0 "></label>
+          <a class="navbar-brand h4 mr-5 text-success" href="/">Contenedor</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mr-5"></span>
+          </button>
+          <a class="navbar-brand h4 mr-5 text-danger" href="#">DockerFile</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mr-5"></span>
+          </button>
+          <a class="navbar-brand h4 mr-5 text-primary" href="ubuntu.html">Ubuntu</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mr-5"></span>
+          </button>
+      
+      </div>
+      <div class="col-md-14">
+
+        <hr class="bg-primary"><br>
+      </div>
+      <div class="comtainer bg-light">
+      <div class="col-md-12 ">
+        <h1 class=" display-4 font-weight-bold font-italic">DockerFile:</h1><br>
+        <p>
+          El Dockerfile es la unidad fundamental del ecosistema Docker. Describe los pasos para crear una imagen de Docker. El flujo de información sigue este esquema central: Dockerfile > Docker Image > Docker Container.
+        </p>
+        <p>
+          El Dockerfile define los pasos a seguir para crear una nueva imagen. Hay que entender que se empieza siempre con una imagen base existente. La nueva imagen nace de la imagen base. Además, hay ciertos cambios puntuales. En nuestro ejemplo de la célula de levadura, los cambios serían mutaciones. Un Dockerfile es determinante en dos aspectos de la nueva imagen de Docker:
+        </p>
+        <ul>
+          <li>
+            La imagen base de la que procede la nueva imagen. Esto ancla la nueva imagen al árbol genealógico del ecosistema Docker.
+          </li>
+          <li>
+            Un conjunto de cambios específicos que diferencian la nueva imagen de la imagen base.
+          </li>
+        </ul>
+        <h2 class="font-weight-bold font-italic">¿Cómo funciona un Dockerfile y cómo se crea una imagen a partir de él?</h2>
+        <p>
+          En el fondo, el Dockerfile es un archivo de texto totalmente normal. El Dockerfile contiene un conjunto de instrucciones, cada una en una línea distinta. Para crear una Docker Image, las instrucciones se ejecutan una tras otra. Quizás te suene este esquema de la ejecución de un script por lotes. Durante la ejecución, se añaden paso por paso más capas a la imagen. Te explicamos cómo funciona exactamente en nuestro artículo temático sobre Docker Image.
+        </p>
+        <p>
+          Una imagen Docker se crea ejecutando las instrucciones de un Dockerfile. Este paso se conoce como el proceso build y empieza con la ejecución del comando “docker build”. El contexto de construcción es un concepto crucial: define a qué archivos y directorios tiene acceso el proceso de construcción, donde un directorio local hace las veces de fuente. El contenido del directorio fuente se transfiere al Docker Daemon al accionar “docker build”. Las instrucciones contenidas en el Dockerfile reciben acceso a los archivos y directorios contenidos en el contexto de construcción.
+        </p>
+
+        <div class="row form-group">
+          <label for="" class="col-form-label col-md-2 h1"></label>
+        <div class="col-md-9">
+          
+          <img src="https://race.nstru.ac.th/home_ex/blog/user/data/image/4200/24092021-121556.png" align="center" width="85%"  >
+        <br><br>
+        </div>
+        </div>
+
+        <div class="row form-group">
+          <label for="" class="col-form-label col-md-1 h1"></label>
+        <div class="col-md-10">
+          <h2 class="font-weight-bold text-danger font-italic">Instrucciones Dockerfile más comunes:</h2> <br>
+          
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Instrucción</th>
+                <th scope="col" class="text-center">Descripción</th>
+                <th scope="col" class="text-center">Comentario</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <th scope="row">1</th>
+                <td ><strong>FROM</strong></td>
+                <td>Establecer imagen base</td>
+                <td>Debe presentarse como primera instrucción; solo una entrada por etapa</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">2</th>
+                <td><strong>ENV</strong></td>
+                <td>Variable de entorno para el proceso de construcción y establecer vida del contenedor</td>
+                <td>Debe presentarse como primera instrucción; solo una entrada por etapa</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">3</th>
+                <td><strong>ARG</strong></td>
+                <td>Declarar parámetros de la línea de comandos para el proceso de construcción</td>
+                <td>Debe aparecer antes que la instrucción FROM</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">4</th>
+                <td><strong>WORKDIR</strong></td>
+                <td>Cambiar de directorio actual</td>
+                <td>---</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">5</th>
+                <td><strong>USER</strong></td>
+                <td>Cambiar usuario y pertenencia al grupo</td>
+                <td>---</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">6</th>
+                <td><strong>COPY</strong></td>
+                <td>Copiar los archivos y directorios de una Image</td>
+                <td>Crea una nueva capa</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">7</th>
+                <td><strong>ADD</strong></td>
+                <td>Copiar los archivos y directorios de una Image</td>
+                <td>Crea una nueva capa; uso no recomendable</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">8</th>
+                <td><strong>RUN</strong></td>
+                <td>Ejecutar el comando de Image durante el proceso de construcción</td>
+                <td>Crea una nueva capa</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">9</th>
+                <td><strong>CMD</strong></td>
+                <td>Establecer argumentos estándar para el inicio del contenedor</td>
+                <td>Solo una entrada por build stage</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">10</th>
+                <td><strong>ENTRYPOINT</strong></td>
+                <td>Establecer argumentos estándar para el inicio del contenedor</td>
+                <td>Solo una entrada por etapa de construcción</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">11</th>
+                <td><strong>EXPOSE</strong></td>
+                <td>Definir asignación de puerto para contenedores en ejecución</td>
+                <td>Los puertos deben estar activos al iniciar el contenedor</td>
+              </tr>
+              <tr class="text-center">
+                <th scope="row">12</th>
+                <td><strong>VOLUME</strong></td>
+                <td>Integrar como volumen directorio de Image al iniciar el contenedor en el sistema anfitrión</td>
+                <td>---</td>
+              </tr>
+            </tbody>
+          </table>
+        <br>
+        </div>
+        </div>
+  
+
+  </div> 
+      </div></div>
+      </div> <br>
+    
+</body>
+</html>
