@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Commit</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <br><br>
+    <div class="container bg-white">
+        <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+          <label for="" class="col-form-label col-sm-0 "></label>
+          <a class="navbar-brand h4 mr-5 text-success" href="/">Contenedor</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mr-5"></span>
+          </button>
+          <a class="navbar-brand h4 mr-5 text-danger" href="#">Docker Commit</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mr-5"></span>
+          </button>
+          <a class="navbar-brand h4 mr-5 text-primary" href="ubuntu.html">Ubuntu</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon mr-5"></span>
+          </button>
+      
+      </div>
+      <div class="col-md-14">
+
+        <hr class="bg-primary"><br>
+      </div>
+      <div class="comtainer bg-light">
+      <div class="col-md-12 ">
+        <h1 class=" display-4 font-weight-bold font-italic">Docker Commit:</h1><br>
+        <p>
+            Con docker commit permite crear una imagen nueva a partir de un contenedor.
+        </p>
+        <p>
+            Puede ser útil confirmar los cambios o la configuración de un contenedor en una nueva imagen. Esto le permite depurar un contenedor ejecutando un shell interactivo o exportar un conjunto de datos de trabajo a otro servidor. Generalmente, es mejor usar Dockerfiles para administrar sus imágenes de una manera documentada y mantenible.
+        </p>
+        <p>
+            Después de realizar algunos cambios dentro de un contenedor, al decidir que le gustaría conservar esos cambios. No desea perder esos cambios después de salir o detener el contenedor y le gustaría reutilizar este tipo de contenedor como base para otros.
+        </p>
+        <h2>Ejemplo:</h2>
+        <p>
+            Se inicia un contenedor de forma interactiva:
+        </p>
+        <pre class="bash" style="font-family:monospace;">docker run <span style="color: #660033;">-it</span> <span style="color: #660033;">--net</span>=host <span style="color: #660033;">--name</span> webAppCommit <span style="color: #660033;">-h</span> luis app_commit:v1</pre>
+        <p>
+            Se actualizan los paquetes y se instalan algunas dependecias:
+        </p>
+        <pre class="bash" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #c20cb9; font-weight: bold;">apt-get update</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #c20cb9; font-weight: bold;">apt-get upgrade</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">apt <span style="color: #660033;">-y</span> <span style="color: #c20cb9; font-weight: bold;">install</span> php7.4</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">apt <span style="color: #c20cb9; font-weight: bold;">install</span> <span style="color: #660033;">-y</span> sqlite3</div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #c20cb9; font-weight: bold;">apt-get install</span> <span style="color: #660033;">-y</span> php7.4-sqlite</div></li></ol></pre>
+        <p>
+            Puede verificar que las dependecias se han instalado como con PHP:
+        </p>
+        <pre class="bash" style="font-family:monospace;">php <span style="color: #660033;">--version</span></pre>
+        <p>
+            Terminado de modificar, hay que salir con:<pre>exit</pre>
+        </p>
+        <p>
+            Se necesita el ID de CONTENEDOR para guardar los cambios realizados en la imagen existente, para ello puede consultarlo con:
+        </p>
+        <pre class="bash" style="font-family:monospace;">docker container <span style="color: #c20cb9; font-weight: bold;">ls</span> <span style="color: #660033;">-a</span></pre>
+        <p>
+            Por último, cree una nueva imagen confirmando los cambios con la sintaxis siguiente (commit):
+        </p>
+        <pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">sudo</span> docker commit <span style="color: #7a0874; font-weight: bold;">&#91;</span>CONTAINER_ID<span style="color: #7a0874; font-weight: bold;">&#93;</span> <span style="color: #7a0874; font-weight: bold;">&#91;</span>new_image_name<span style="color: #7a0874; font-weight: bold;">&#93;</span></pre>
+        <pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">sudo</span> docker commit deddd39fa163 webapp-commit:v1</pre>
+        <p>
+            La imagen recién creada ahora debería estar disponible en la lista de imágenes locales. Puede verificarlo revisando la lista de imágenes nuevamente:
+        </p>
+        <pre class="bash" style="font-family:monospace;">docker images</pre>
+        </div>
+        <div class="row form-group">
+            <label for="" class="col-form-label col-md-2 h1"></label>
+          <div class="col-md-9">
+            
+            <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--4zs-7lmM--/c_imagga_scale,f_auto,fl_progressive,h_720,q_auto,w_1280/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6kwml9qrs9xbsw21r4u6.png" align="center" width="85%"  >
+          <br><br>
+          </div>
+          </div>
+        <div>
+        </div>
+      </div> <br> <br>
+</body>
+</html>
